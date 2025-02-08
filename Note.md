@@ -21,4 +21,50 @@ Input.GetKeyUp(KeyCode.Space);
 
 https://docs.unity3d.com/2020.3/Documentation/ScriptReference/KeyCode.html
 
+### Move And Jump
 
+```cs
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Player : MonoBehaviour
+{
+	private float xInput;
+	public Rigidbody2D rb;
+	public int xSpeed;
+	public int jumpForce;
+    // Start is called before the first frame update
+    void Start()
+    {
+    	xSpeed = 5;
+    	jumpForce = 5;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+    	xInput = 0;
+    	if(Input.GetKey(KeyCode.Space))
+    	{
+    		Debug.Log("Space is be holded");
+    		rb.velocity = new Vector2(rb.velocity.x,jumpForce);
+    	}
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+        	Debug.Log("Space is be pressed");
+        }
+        if(Input.GetKeyUp(KeyCode.Space))
+        {
+        	Debug.Log("Space is UP");
+        }
+        if(Input.GetKeyDown(KeyCode.W))
+        {
+        	Debug.Log("Up");
+        }
+        if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+        	xInput = Input.GetAxisRaw("Horizontal");
+        	rb.velocity = new Vector2(xInput*xSpeed,rb.velocity.y);
+    }
+}
+```
